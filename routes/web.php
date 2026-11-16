@@ -7,6 +7,7 @@ use App\Http\Controllers\MahasiswaController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MataKuliahController;
 use App\Http\Controllers\ProdiController;
+use App\Http\Controllers\DashboardController;
 
 Auth::routes();
 
@@ -53,3 +54,13 @@ Route::middleware(['auth', 'role:1,2'])->group(function () {
 Route::middleware(['auth', 'role:1'])->group(function () {
     Route::resource('prodi', ProdiController::class)->except(['index']);
 });
+
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+});
+
+Route::get('/profil', function () {
+    return view('profil');
+})->middleware('auth');
+
+Route::middleware(['auth', 'role:1,2'])->get('/nilai', fn () => view('nilai'));

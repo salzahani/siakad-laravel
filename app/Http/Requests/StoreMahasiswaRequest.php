@@ -27,7 +27,6 @@ class StoreMahasiswaRequest extends FormRequest
             'nim' => 'required|string|size:' . Mahasiswa::PANJANG_NIM . '|unique:mahasiswa,nim',
             'nama' => 'required|string|min:3|max:100',
             'id_prodi' => 'required|exists:prodi,id_prodi',
-            'required|exists:prodi,id_prodi',
             'email' => 'nullable|email|unique:mahasiswa,email',
         ];
     }
